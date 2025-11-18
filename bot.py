@@ -1,6 +1,7 @@
 import logging
 import os
 import json
+from keep_alive import keep_alive
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, MessageHandler, filters, ConversationHandler, CallbackQueryHandler
 
@@ -174,6 +175,10 @@ if __name__ == '__main__':
     application.add_handler(CommandHandler('start', start))
     application.add_handler(login_handler)
     application.add_handler(CallbackQueryHandler(check_info, pattern='^info$'))
+    
+
+    # Jalankan server keep_alive sebelum bot jalan
+    keep_alive() 
     
     # Jalankan bot
     application.run_polling()
